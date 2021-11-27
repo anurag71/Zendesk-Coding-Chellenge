@@ -4,12 +4,6 @@ import java.util.Scanner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/*
- * The MenuController handles all user input and menus. It calls on MainView 
- * and TicketView methods to display various relevant information to the 
- * user, as well as the APIHandler to actually fetch requested ticket
- * information.
- */
 public class mainController {
 	displayMain displayMenu;
 	displayTicket TicketDisplay;

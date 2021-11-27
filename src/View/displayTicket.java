@@ -5,9 +5,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/*
- * The TicketView handles all display and presentation of ticket information.
- */
 public class displayTicket {
 
 	private static int PAGE_LIMIT = 25;
