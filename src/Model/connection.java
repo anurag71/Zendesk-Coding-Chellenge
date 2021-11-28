@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,10 +15,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+ * This code is responsible for interacting with the Zendesk API and send that information
+ * to mainController. This code is also responsible for formatting the date to a 
+ * more user friendly format.
+ */
+
 public class connection {
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 	private Scanner sc;
 
+	//Method to get all the tickets
 	public JSONObject getAllTickets() throws JSONException {
 		System.out.println("Fetching your Ticket(s)...");
 		JSONObject ticketsJSON = new JSONObject();
@@ -25,6 +34,8 @@ public class connection {
 		ticketsJSON = formatMultiJSON(ticketsJSON);
 		return ticketsJSON;
 	}
+
+	//Method to get ticket for a specific ticketID
 	public JSONObject getTicketByID(String ticketID) throws JSONException {
 		System.out.println("Fetching your Ticket " + ticketID + "...");
 		JSONObject ticketsJSON = new JSONObject();
@@ -34,7 +45,11 @@ public class connection {
 		ticketsJSON = formatSingleJSON(ticketsJSON);
 		return ticketsJSON;
 	}
+
+	// Method that establishes connection to the API and stores the API response in a JSON.
 	public JSONObject connectToAPI(boolean multi, String id) {
+		
+		//Variables to store the agent's conenction information
 		String subdomain = "<EnterYourSubdomain>";
 		String email_address = "<EnterYourEmail>";
 		String password = "<EnterPassword>";
@@ -73,6 +88,8 @@ public class connection {
 		}
 		return ticketsJSON;
 	}
+
+	//Method to encode the agent's credentials
 	public String basicAuthentication(String email_address, String password) {
 		String basicAuth = "";
 		String userAuthentication = email_address + ":" + password;
@@ -80,6 +97,8 @@ public class connection {
 
 		return basicAuth;
 	}
+
+	//Method to format all the tickets obtained.
 	public JSONObject formatMultiJSON(JSONObject ticketsJSON) throws JSONException {
 		JSONArray ticketsArr = new JSONArray();
 		ticketsArr = ticketsJSON.getJSONArray("tickets");
@@ -105,8 +124,8 @@ public class connection {
 		return ticketsJSON;
 	}
 
+	//Method to format the information that needs to be displayed for a single ticket
 	public JSONObject formatSingleJSON(JSONObject ticketsJSON) throws JSONException {
-		// format the tickets into a display-able format
 		JSONObject ticket = new JSONObject();
 		ticket = ticketsJSON.getJSONObject("ticket");
 

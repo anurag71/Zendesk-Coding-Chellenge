@@ -1,9 +1,18 @@
+package Controller;
+
+import View.*;
 
 import java.util.Scanner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import Model.connection;
 
+/*
+ * This code is used to handle user input and accordingly interact with connection.java.
+ * The data obtained from conenction.java is passed on to appropriate methods in displayMain
+ * and displayTicket to provide the output to the user.
+ */
 public class mainController {
 	displayMain displayMenu;
 	displayTicket TicketDisplay;
@@ -28,20 +37,26 @@ public class mainController {
 
 		while (true) {
 
+			//Display the welcome message only once
 			if (firstTime) {
 				displayMenu.printWelcome();
 				firstTime = false;
 			}
+
+			//Display the menu to the user
 			displayMenu.printMainMenu();
 			input = getInput();
 			if (input.contains("1")) {
 				displayAllTickets();
-			} else if (input.contains("2")) {
+			} 
+			else if (input.contains("2")) {
 				displaySingleTicket();
-			} else if (input.contains("3") || input.contains("q")) {
+			} 
+			else if (input.contains("3") || input.contains("q")) {
 				displayMenu.quit();
 				return;
-			} else {
+			} 
+			else {
 				displayMenu.unrecognizedInput();
 			}
 			input = "";
@@ -55,9 +70,11 @@ public class mainController {
 		int pageNumber = 1;
 		JSONObject ticketsJSON = new JSONObject();
 
+		//Obtain the tickets from the API
 		try {
 			ticketsJSON = conn.getAllTickets();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println("ERROR: Could not successfully get your tickets.");
 			return;
 		}
@@ -66,17 +83,22 @@ public class mainController {
 		while (true) {
 			input = getInput();
 
+
 			if (input.contains("menu")) {
 				MainMenu();
-			} else if (input.contains("n")) {
+			}
+			else if (input.contains("n")) {
 				pageNumber++;
 				pageNumber = TicketDisplay.AllTicketDisplay(ticketsJSON, pageNumber);
-			} else if (input.contains("b")) {
+			} 
+			else if (input.contains("b")) {
 				pageNumber--;
 				pageNumber = TicketDisplay.AllTicketDisplay(ticketsJSON, pageNumber);
-			} else if (input.contains("q") || input.contains("quit")) {
+			} 
+			else if (input.contains("q") || input.contains("quit")) {
 				displayMenu.quit();
-			} else {
+			} 
+			else {
 				displayMenu.invalidPageSwitchInput();
 			}
 			input = "";
@@ -84,6 +106,7 @@ public class mainController {
 		}
 	}
 
+	//Obtain the ticekt for the user specified ticketID
 	public void displaySingleTicket() throws JSONException {
 		String id = "";
 		JSONObject ticketsJSON = new JSONObject();
@@ -94,7 +117,8 @@ public class mainController {
 		connection conn = new connection();
 		try {
 			ticketsJSON = conn.getTicketByID(id);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println("ERROR: Could not find ticket " + id + ". Please check the ID and try again.");
 			return;
 		}

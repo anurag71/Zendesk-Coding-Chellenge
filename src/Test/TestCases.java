@@ -1,10 +1,17 @@
+package Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
+import Model.connection;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+
+/*
+ * JUnit 4 is used. 
+ * Contains the test cases to validate the code.
+ */
 public class TestCases {
 
 	@Test
