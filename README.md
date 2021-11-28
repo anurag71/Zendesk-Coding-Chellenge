@@ -7,7 +7,7 @@ To run,
 3. In terminal, change to src directory, and run the following command.  
     javac -classpath ".:../JARS/*" initiator.java  
     Please replace : with ; when executing on Windows.  
-3. Once it has compiled successfully, run below command to start execution. 
+3. Once it has compiled successfully, run below command to start execution.  
     java -classpath ".:../JARS/*" initiator  
     Please replace : with ; when executing on Windows.
     
