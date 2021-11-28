@@ -17,5 +17,5 @@ It can display these in 2 ways,
 1. Display All Tickets:  
    This option displays all the tickets stored at Zendesk at the mooment.  
    The tickets are displayed in pages, with each page having 25 tickets each.
-2. Display Single Ticket based on it's ID:
+2. Display Single Ticket based on it's ID:  
    This option displays the content for a particular ticket ID.
