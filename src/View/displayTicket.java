@@ -11,12 +11,11 @@ public class displayTicket {
 
 	private static int PAGE_LIMIT = 25;
 
-
-	//Method to page wise display all tickets
+	// Method to page wise display all tickets
 	public int AllTicketDisplay(JSONObject ticketsJSON, int pageNumber) throws JSONException {
-		
-		//The API returns a JSON that contains the tickets in an array
-		//ticketsArr is used to store that array
+
+		// The API returns a JSON that contains the tickets in an array
+		// ticketsArr is used to store that array
 		JSONArray ticketsArr = new JSONArray();
 		ticketsArr = ticketsJSON.getJSONArray("tickets");
 		System.out.println(ticketsArr);
@@ -40,7 +39,7 @@ public class displayTicket {
 			printTicket(ticketsArr.getJSONObject(i).getInt("id"), ticketsArr.getJSONObject(i).getString("status"),
 					ticketsArr.getJSONObject(i).getString("subject"),
 					ticketsArr.getJSONObject(i).getInt("submitter_id"),
-					ticketsArr.getJSONObject(i).getString("updated_at"));
+					ticketsArr.getJSONObject(i).getString("updated_at"), false, "");
 			ticketsOnPage++;
 		}
 
@@ -51,16 +50,23 @@ public class displayTicket {
 		return pageNumber;
 	}
 
-	//Method to get information for a single ticket 
+	// Method to get information for a single ticket
 	public void SingleTicketDisplay(JSONObject ticketsJSON) throws JSONException {
 		printTicket(ticketsJSON.getInt("id"), ticketsJSON.getString("status"), ticketsJSON.getString("subject"),
-				ticketsJSON.getInt("requester_id"), ticketsJSON.getString("updated_at"));
+				ticketsJSON.getInt("requester_id"), ticketsJSON.getString("updated_at"), true,
+				ticketsJSON.getString("description"));
 	}
 
-	//Method to print the ticket information to the console
-	public void printTicket(int id, String status, String subject, int submitterID, String updatedAt) {
-		System.out.println("Ticket " + id + "\nStatus: " + status + "\nSubject: '" + subject + "'" + "\nSubmitted By:"
-				+ submitterID + "\nUpdated At: " + updatedAt);
+	// Method to print the ticket information to the console
+	public void printTicket(int id, String status, String subject, int submitterID, String updatedAt,
+			boolean SingleTicket, String desc) {
+		if (!SingleTicket) {
+			System.out.println("Ticket " + id + "\nStatus: " + status + "\nSubject: '" + subject + "'"
+					+ "\nSubmitted By:" + submitterID + "\nUpdated At: " + updatedAt);
+		} else {
+			System.out.println("Ticket " + id + "\nStatus: " + status + "\nSubject: '" + subject + "'"
+					+ "\nSubmitted By:" + submitterID + "\nUpdated At: " + updatedAt + "\nDescription: " + desc);
+		}
 		System.out.println("---------------------------");
 	}
 
