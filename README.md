@@ -6,8 +6,10 @@ To run,
 2. Update the subdomain, email and password variables in connection.java with your login credentials, for establishing connections via the Zendesk API.
 3. In terminal, change to src directory, and run the following command.  
     javac -classpath ".:../JARS/*" initiator.java  
-3. Once it has compiled successfully, run below command to start execution
+    Please replace : with ; when executing on Windows.  
+3. Once it has compiled successfully, run below command to start execution. 
     java -classpath ".:../JARS/*" initiator  
+    Please replace : with ; when executing on Windows.
     
 Functionalities:  
 The Zendesk Ticket Viewer can be used to display Tickets created on Zendesk.  
